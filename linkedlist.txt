@@ -1,0 +1,339 @@
+import java.io.*;
+import java.util.*;
+class ll
+{
+    class node
+    {
+        node p;int n;
+        node(int no)
+        {
+            n=no;
+            p=null;
+        }
+    }
+        node start;
+        //1.ADDITION OF NODE
+        void adatbeg(int nm)
+        {
+           //create node
+           node active=new node(nm);
+           //linking the node to the list
+           active.p=start;
+            start=active;
+        }
+        void adatpos(int nm,int pos)
+        {
+        node before=start,active;
+        active=new node(nm);
+        //check if position is one then add at beginning
+        if(pos==1)
+        {
+            active.p=start;
+            start=active;
+            return;
+        }
+        else
+        {
+            //moving to the position 
+         for(int i=1;i<(pos-1);i++)
+         before=before.p;
+         //adding and linking the node at the given position
+         active.p=before.p;
+         before.p=active;
+        }
+    }
+    void adatend(int nm)
+    {
+         node active=new node(nm);node last =start;
+            //check if link list is previously created or its the first node
+            if(start==null)
+            {
+                start=new node(nm);
+                return;
+            }
+            active.p=null;
+            while(last.p!=null)
+            last=last.p;
+            last.p=active;
+            return;
+        }
+        //2.DELETION OF NODE
+        void deleteatbeg()
+        {
+            node active=start;
+            //check for linked list to be empty
+            if(active==null)
+            {
+                System.out.println("Link list empty");
+                return;
+            }
+            //deleting a node and moving to next
+            start=start.p;
+        }
+        void delatpos(int p)
+        {
+            node active=start;
+            if(start==null)
+            {
+            System.out.println("Link list empty");
+        return;
+    }
+    //checking for deletion from the first position
+    if(p==1)
+    {
+        start=start.p;
+        return;
+    }
+    for(int i=1;i<(p-1);i++)
+      active=active.p;
+      //deleting the node and linking to the next node
+      node next=(active.p).p;
+      active.p=next;
+    }
+        void deleteakey(int k)
+        {
+            node active=start,before=null;
+            //if first node has the number
+            if(active!=null&&active.n==k)
+            {
+                start=active.p;
+                return;
+            }
+            //search for number
+            while(active!=null&&active.n!=k)
+            {
+                before=active;
+                active=active.p;
+            }
+            //if number wasn't present
+            if(active==null)
+            return;
+            before.p=active.p;
+        }
+        void delatend()
+        {
+           node active=start;
+           //traversing to the end
+           if(active==null)
+           {System.out.println("Linked list Empty");
+           return;
+        }
+        //traversing to the node before the last node
+           while((active.p).p!=null)
+           active=active.p;
+           active.p=null;
+        }
+        //3.CALCULATING LENGTH
+        void length()
+        {
+            node last=start;int l=0;
+            if(start==null)
+            {
+              System.out.println("Length="+0);
+              return;
+            }
+            //traversing to the end to calculate the length
+            while(last!=null)
+            {
+                last=last.p;
+                l++;
+            }
+            System.out.println("Length="+l);
+        }
+        //4.Swapping nodes without swapping data
+        void swap(int x,int y)
+        {
+            //nodes to be swapped are same
+            if(x==y)
+            return;
+            node prex=null,prey=null,actix=start,actiy=start;
+          while (actix.n!= x)
+        {
+            prex = actix;
+            actix = actix.p;;
+        }
+         while(actiy.n!=y)
+            {
+                prey=actiy;
+                actiy=actiy.p;
+            }
+        if (actix== null || actiy == null)
+            return;
+        if (prex != null)
+            prex.p = actiy;
+        else start=actiy;
+        if(prey!=null)
+            prey.p=actix;
+        else 
+            start=actix;
+        node temp = actix.p;
+        actix.p = actiy.p;
+       actiy.p = temp;
+    }
+            
+         /*   while(actix.n!=x)
+            {
+                prex=actix;
+                actix=actix.p;
+            }
+            while(actiy.n!=y)
+            {
+                prey=actiy;
+                actiy=actiy.p;
+            }**/
+            
+        //5.REVERSE THE LINKED LIST
+        void reverse()
+        {
+       node prev=null,active=start,temp=null;
+         while (active != null) {
+            temp = active.p;
+            active.p = prev;
+            prev = active;
+            active =temp;
+        }
+        start = prev;
+       /* while(start.n!=end.n)
+        {
+            //connecting last node to the first
+            last.p=active;
+            start=start.p;
+            active.p=null;
+            last=start;active=start;
+            while(last.p!=null)
+            last=last.p;
+           }*/
+    }
+    //6.ROTATE THE LINKED LIST
+    void rotate(int x)
+    {
+        node active=start;int c=1;
+         if (x == 0) return;
+        while (c<x &&active!=null)
+        {
+            active=active.p;c++;
+        }
+         if (active == null)
+            return;
+        node newn = active;
+        while (active.p!= null)
+            active=active.p;
+         active.p=start;
+         start=newn.p;
+         newn.p=null; 
+    }/*node last=start,active=start;int t=1;
+        while(last!=null)
+        {
+            last=last.p;
+            t++;
+        }
+        for(int j=1;j<=(t-x);j++)
+        {
+            last.p=active;
+            start=active.p;
+            active.p=null;
+            while(last!=null)
+            last=last.p;
+            active=start;
+     }**/
+     void display()
+     {
+         node t=start;
+         System.out.print("Linked List=");
+            while(t!=null)
+            {
+                System.out.println(t.n);
+                t=t.p;
+            }
+     }   
+     public static void main(String args[])throws IOException
+     {
+          Scanner sc=new Scanner(System.in);
+          ll ob=new ll();
+          int ch,c,x,y,l=1,z,po;
+          while(l==1)
+              {
+             System.out.println("Enter you choice:- 1.Addition\n2.DELETION\n3.Calculating Length\n4.Swapping nodes\n5REverse\n6.Rotate");
+              ch=sc.nextInt();
+               switch(ch)
+              {
+              case 1:
+              System.out.println("Enter the position for addition-1.At beginning\n2.at a given positon\n3.at the end");
+              c=sc.nextInt();
+              System.out.println("Enter an integer");
+              z=sc.nextInt();
+              switch(c)
+              {
+                  case 1:
+                  ob.adatbeg(z);
+                  break;
+                  case 2:
+                  System.out.println("enter the position");
+                  po=sc.nextInt();
+                  ob.adatpos(z,po);
+                  break;
+                  case 3:
+                  ob.adatend(z);
+                  break;
+                  default:
+                  System.out.println("Wrong choice");
+                }
+                break;
+                case 2:
+               System.out.println("Enter the position of deletion-1.from beginning\n2.from a given positon\n3.a given number\n4.from the end");
+               c=sc.nextInt();
+               switch(c)
+              {
+                  case 1:
+                  ob.deleteatbeg();
+                  break;
+                  case 2:
+                  System.out.println("enter the position");
+                  po=sc.nextInt();
+                  ob.delatpos(po);
+                  break;
+                  case 3:
+                  System.out.println("enter the number");
+                  po=sc.nextInt();
+                  ob.deleteakey(po);
+                  break;
+                  case 4:
+                  ob.delatend();
+                  default:
+                  System.out.println("Wrong choice");
+                }
+                break;
+                case 3:
+                ob.length();
+                break;
+                case 4:
+                System.out.println("Enter the number to be swapped");
+                x=sc.nextInt();
+                y=sc.nextInt();
+                ob.swap(x,y);
+                break;
+                case 5:
+                ob.reverse();
+                break;
+                case 6:
+                System.out.println("enter the rotation position");
+                po=sc.nextInt();
+                ob.rotate(po);
+                break;
+                default:
+                System.out.println("Wrong choice!!Try again");
+            }
+            ob.display();
+            System.out.println("to continue press 1 to exit press 0");
+            l=sc.nextInt();
+        }
+    }
+}
+                
+
+                
+               
+                
+              
+              
+      
