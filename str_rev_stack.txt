@@ -1,0 +1,34 @@
+import java.io.*;
+import java.util.*;
+public class str_rev_stack
+{
+    char c[];int top;
+        str_rev_stack(int len)
+        {
+          c=new char[len];
+          top=-1;
+        }
+    void push(char ch)
+    {
+        c[++top]=ch;
+    }
+    void display()
+    {
+        while(top!=-1)
+        System.out.print(c[top--]);
+    }
+        public  static void main(String args[])throws IOException
+        {
+            Scanner sc=new Scanner(System.in);
+            int i;String st;
+            System.out.println("Enter the string");
+            st=sc.next();
+            str_rev_stack ob=new str_rev_stack(st.length());
+            for(i=0;i<st.length();i++)
+            ob.push(st.charAt(i));
+            ob.display();
+        }
+    }
+    
+            
+            
