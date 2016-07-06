@@ -1,0 +1,34 @@
+public static void main(String args[])throws IOException
+        {
+            Scanner sc=new Scanner(System.in);
+            int size,ch=1,c,n;
+            System.out.println("Enter the size of stack array");
+            size=sc.nextInt();
+            stackarray ob=new stackarray(size);
+            while(ch==1)
+            {
+                System.out.println("Enter your choice: 1 for push 2 for pop 3 for peek");
+                c=sc.nextInt();
+                switch(c)
+                {
+                case 1:
+                System.out.println("Enter an integer");
+                n=sc.nextInt();
+                ob.push(n);
+                break;
+                case 2:
+                ob.pop();
+                break;
+                case 3:
+                ob.peek();
+                break;
+                default:
+                System.out.println("Wrong choice");
+            }
+                System.out.println("to continue press 1");
+                ch=sc.nextInt();
+            }
+            ob.display();
+        }
+    }
+        

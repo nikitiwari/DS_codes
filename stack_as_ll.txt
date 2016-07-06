@@ -1,0 +1,79 @@
+import java.io.*;
+import java.util.*;
+class stack_as_ll
+{
+    node top;
+class node
+    {
+        node p;int n;
+        node(int no)
+        {
+            n=no;
+            p=null;
+        }
+    }
+    void push(int nm)
+    {
+        node active=new node(nm);
+        if(top==null)
+        top=active;
+        else
+        {
+            active.p=top;
+            top=active;
+        }
+    }
+    void pop()
+    {
+        if(top==null)
+        System.out.println("Stack empty");
+        else
+        {
+            System.out.println(top.n);
+            top=top.p;
+        }
+    }
+    void display()
+    {
+        while(top!=null)
+            {
+                System.out.println(top.n);
+                top=top.p;
+            }
+     }   
+    void peek()
+    {
+        System.out.println(top.n);
+    }
+        public static void main(String args[])throws IOException
+        {
+            Scanner sc=new Scanner(System.in);
+            int ch=1,c,x;
+            stack_as_ll ob=new stack_as_ll();
+            while(ch==1)
+            {
+                System.out.println("Enter your choice: 1 for push 2 for pop 3 for peek");
+                c=sc.nextInt();
+                switch(c)
+                {
+                case 1:
+                System.out.println("Enter an integer");
+                x=sc.nextInt();
+                ob.push(x);
+                break;
+                case 2:
+                ob.pop();
+                break;
+                case 3:
+                ob.peek();
+                break;
+                default:
+                System.out.println("Wrong choice");
+            }
+                System.out.println("To continue press 1");
+                ch=sc.nextInt();
+            }
+            ob.display();
+        }
+    }
+        
