@@ -1,0 +1,64 @@
+import java.io.*;
+import java.util.*;
+public class balancep
+{
+    int l,top;char x[];
+   balancep(int size)
+    {
+        top=-1;
+        l=size;
+        x=new char[l];
+    }
+    void push(char c)
+    {
+        x[++top]=c;
+    }
+    char pop()
+    {
+        return(x[top--]);
+    }
+    int match(char c,char ch)
+    {
+        if(c=='('){
+        if(ch==')')
+        return 1;
+        else return 0;}
+        else if(c=='{'){
+        if(ch=='}')
+        return 1;
+        else return 0;}
+        else {
+        if(ch==']')
+        return 1;
+        else return 0;}
+        
+    }
+    public static void main(String args[])throws IOException
+    {
+        Scanner sc=new Scanner(System.in);
+        String st;int i,n;char ch;
+        System.out.println("Enter the expression");
+        st=sc.next();
+        balancep ob=new balancep(st.length()); 
+        for(i=0;i<st.length();i++)
+        {
+            ch=st.charAt(i);
+            if(ch=='('||ch=='{'||ch=='[')
+            ob.push(ch);
+            else if(ch==')'||ch=='}'||ch==']')
+            {
+                if(ob.x==null)
+                System.out.println("Brackets unmatched");
+                else
+                {
+                    n=ob.match(ob.pop(),ch);
+                    if(n==0)
+                    System.out.println("Brackets unmatched");
+                    else
+                    ob.pop();
+                }
+            }
+        }
+    }
+}
+   

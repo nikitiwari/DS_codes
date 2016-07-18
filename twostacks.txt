@@ -1,0 +1,109 @@
+import java.io.*;
+import java.util.*;
+public class twostacks
+{
+    int n,top1,top2;int x[];
+    //constructor to initialize stack array and top
+    twostacks(int s)
+    {
+        n=s;
+         x=new int[n];
+        top1=-1;top2=s;
+    }
+    
+        void push1(int nm)
+        {
+        if(top1==n/2)
+            {
+                System.out.println("Stack overflow");
+                return;
+            }
+            x[++top1]=nm;
+            //filling the stack and then check for wether the stack is full or not
+            if(top1==n/2)
+            System.out.println("Stack full");
+        }
+        void push2(int nm)
+        {
+            if(top2==n/2)
+            {
+                System.out.println("Stack overflow");
+                return;
+            }
+            x[--top2]=nm;
+            //filling the stack and then check for wether the stack is full or not
+            if(top2==n/2)
+            System.out.println("Stack full");
+        }
+        void pop1()
+        {
+            if(top1==-1)
+            {
+                System.out.println("Stack underflow");
+                return;
+            }
+            System.out.println(x[top1--]);
+            if(top1==-1)
+            System.out.println("Stack empty");
+        }
+        void pop2()
+        {
+            if(top2==n)
+            {
+                System.out.println("Stack underflow");
+                return;
+            }
+            System.out.println(x[top2++]);
+            if(top2==n)
+            System.out.println("Stack empty");
+        }
+       
+        void display()
+        {
+            for(int i=n-1;i>=0;i--)
+            System.out.println(x[i]);
+        }
+        public static void main(String args[])throws IOException
+        {
+            Scanner sc=new Scanner(System.in);
+            int size,ch=1,c,n;
+            System.out.println("Enter the size of stack array");
+            size=sc.nextInt();int i=1;
+            twostacks ob=new twostacks(size);
+            while(ch==1)
+            {
+                System.out.println("Enter your choice: 1 for push 2 for pop");
+                c=sc.nextInt();
+                switch(c)
+                {
+                case 1:
+                System.out.println("Enter an integer");
+                n=sc.nextInt();
+                if(i%2!=0)
+                ob.push1(n);
+                else
+                ob.push2(n);
+                break;
+                case 2:
+                if(i%2!=0)
+                {
+                System.out.println("Element popped from stack 1");
+                ob.pop1();
+                }
+                else 
+                {
+                System.out.println("Element popped from stack 2");
+                ob.pop2();
+                }
+                break;
+                default:
+                System.out.println("Wrong choice");
+            }
+                System.out.println("to continue press 1");
+                ch=sc.nextInt();
+                i++;
+            }
+            ob.display();
+        }
+    }
+                

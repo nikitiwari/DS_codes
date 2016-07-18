@@ -1,0 +1,82 @@
+import java.io.*;
+import java.util.*;
+public class qarray
+{
+    int x[],r,f,n;
+    qarray(int size)
+    {
+        n=size;
+        r=-1;f=0;
+        x=new int[n];
+    }
+    void enqueue(int no)
+    {
+        if(r==(n-1))
+       { System.out.println("Queue overflow");
+        return;
+        }
+        x[++r]=no;
+        if(r==n-1)
+        System.out.println("queue is full");
+    }
+    void dequeue()
+    {
+        if(f==n-1)
+            {
+                System.out.println("Queue underflow");
+                return;
+            }
+            System.out.println(x[f++]);
+            if(f==n-1)
+            System.out.println("Queue empty");
+        }
+        void front()
+        {System.out.println("Number at front "+x[f]);
+        }
+        void rear()
+        {
+           System.out.println("Number at rear position "+x[r]);
+        }
+        void display()
+        {
+            System.out.println("The queue goes like this");
+            while(f!=r)
+            System.out.println(x[f++]);
+            System.out.println(x[f]);
+        }
+        public static void main(String args[])throws IOException
+        {
+            Scanner sc=new Scanner(System.in);
+            int size,ch=1,c,nm;
+            System.out.println("Enter the size");
+            size=sc.nextInt();
+            qarray ob=new qarray(size);
+            while(ch==1)
+            {
+               System.out.println("Enter your choice 1 to add 2 to pop 3 to display front 4 for rear");
+               c=sc.nextInt();
+            switch(c)
+                {
+                case 1:
+                System.out.println("Enter an integer");
+                nm=sc.nextInt();
+                ob.enqueue(nm);
+                break;
+                case 2:
+                ob.dequeue();
+                break;
+                case 3:
+                ob.front();
+                break;
+                case 4:
+                ob.rear();
+                break;
+                default:
+                System.out.println("Wrong choice");
+            }
+                System.out.println("to continue press 1");
+                ch=sc.nextInt();
+            }
+                 ob.display();
+            }
+    }

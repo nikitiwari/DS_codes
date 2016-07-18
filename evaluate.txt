@@ -1,0 +1,67 @@
+import java.io.*;
+import java.util.*;
+public class evaluate
+{
+    int l,top;int x[];
+    evaluate(int size)
+    {
+        top=-1;
+        l=size;
+        x=new int[l];
+    }
+    void push(int c)
+    {
+        x[++top]=c;
+    }
+   int pop()
+    {
+        return(x[top--]);
+    }
+    void display()
+   {
+       System.out.println(x[top]);
+    }
+    public static void main(String args[])throws IOException
+    {
+        Scanner sc=new Scanner(System.in);
+        String st;int i,z,y;char ch;
+        System.out.println("Enter the expression");
+        st=sc.next();
+        evaluate ob=new evaluate(st.length()); 
+        for(i=0;i<st.length();i++)
+        {
+            ch=st.charAt(i);
+         if(ch>='0'&&ch<='9')
+         {ob.push(Character.getNumericValue(ch));
+         
+        }
+         else 
+         {
+             z=ob.pop();
+             y=ob.pop();
+             switch(st.charAt(i))
+             {
+                 case '+':
+                 ob.push((z+y));
+                 break;
+                 case '-':
+                 ob.push((y-z));
+                 break;
+                 case '*':
+                 ob.push((y*z));
+                 break;
+                 case '/':
+                 ob.push((y/z));
+                 break;
+                }
+            }
+        }
+        ob.display();
+    }
+}
+        
+                 
+                 
+         
+        
+        
