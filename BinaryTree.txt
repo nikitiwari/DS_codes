@@ -1,0 +1,73 @@
+import java.io.*;
+import java.util.*;
+class BinaryTree
+{
+node root;
+//constructor to initialize node
+BinaryTree(int x)
+    {
+        root = new node(x);
+    }
+ 
+    BinaryTree()
+    {
+        root = null;
+    }
+    void postorder(node active)
+    {
+        if (active == null)
+            return;
+              //recurse left first
+        postorder(active.left);
+        postorder(active.right);
+        System.out.print(active.n + " ");
+    }
+    void inorder(node active)
+    {
+        if (active == null)
+            return;
+          inorder(active.left);
+        System.out.print(active.n + " ");
+        inorder(active.right);
+    }
+    void preorder(node active)
+    {
+        if (active == null)
+            return;
+        System.out.print(active.n + " ");
+        preorder(active.left);
+        preorder(active.right);
+    }
+    void postorder()  {    
+        postorder(root);  }
+    void inorder()    {   
+        inorder(root);   }
+    void preorder()   {    
+        preorder(root);  }
+ 
+    public static void main(String args[])throws IOException
+    {
+      BinaryTree ob = new BinaryTree();
+        ob.root = new node(12);
+        ob.root.left = new node(14);
+        ob.root.right = new node(6);
+        ob.root.left.left = new node(8);
+         ob.root.left.left.right = new node(40);
+          System.out.println("Preorder traversal: ");
+        ob.preorder();
+        System.out.println("\nInorder traversal: ");
+        ob.inorder();
+        System.out.println("\nPostorder traversal:");
+        ob.postorder();
+        
+    }
+}
+class node
+{
+    int n;node left,right;
+node(int x)
+{
+    n=x;
+    left=null;right=null;
+}
+}
